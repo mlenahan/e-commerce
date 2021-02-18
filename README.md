@@ -13,5 +13,3 @@ Change to the `ecommerce` directory and run the development server
 cd ecommerce
 python manage.py runserver
 ```
-
-```
