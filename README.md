@@ -2,35 +2,16 @@
 
 ## Getting Started 
 
-Clone the repo and create a virtualenv called venv. 
-
+Clone the repo and install requirements using virtual environment
 ```
-pip install virtualenv
 virtualenv venv
-
-```
-
-Activate the virtualenv.
-
-```
 source venv/bin/activate
-
-```
-
-
-
-
-Install requirements.
-
-```
 pip install -r requirements.txt
-
 ```
-
-Change to the 'ecommerce' directory and run the server
-
+Change to the `ecommerce` directory and run the development server
 ```
 cd ecommerce
 python manage.py runserver
+```
 
 ```
