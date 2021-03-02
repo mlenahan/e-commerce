@@ -1,0 +1,15 @@
+<h1>Products</h1>
+
+<h2>Recently added</h2>
+{% for product in latest_products %}
+<ul>
+    <li>
+        <div>
+            <div><strong>Name: </strong>{{ product.name }}</div>
+            <div><strong>Type: </strong>{{ product.product_type }}</div>
+            <div><strong>Language: </strong>{{ product.language }}</div>
+            <div><strong>Rarity: </strong>{{ product.rarity }}</div>
+        </div>
+    </li>
+</ul>
+{% endfor %}
