@@ -8,7 +8,11 @@
             <div><strong>Name: </strong>{{ product.name }}</div>
             <div><strong>Type: </strong>{{ product.product_type }}</div>
             <div><strong>Language: </strong>{{ product.language }}</div>
+            {% if product.rarity %}
             <div><strong>Rarity: </strong>{{ product.rarity }}</div>
+            {% else %}
+
+            {% endif %}
         </div>
     </li>
 </ul>
