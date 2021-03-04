@@ -16,3 +16,15 @@ class HomePageView(TemplateView):
         return context
 
 
+class ProductByTypeView(TemplateView):
+
+    template_name = 'product_by_type.html'
+
+    def get_context_data(self, product_type):
+        context = super().get_context_data(product_type)
+        context['product_type'] = (
+            models.Product.objects.filter(product_type)
+            .order_by('-created_at')
+        )
+        return context
+
