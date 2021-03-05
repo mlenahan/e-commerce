@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 from products import models
-from products.base import ProductType
-
+from django.http import Http404
+from django.shortcuts import render
 
 class HomePageView(TemplateView):
 
@@ -29,4 +29,19 @@ class ProductByTypeView(TemplateView):
             .order_by('-created_at')
         )
         return context
+
+class ProductDetailView(TemplateView):
+
+    template_name = 'product_detail_view.html'
+
+    def get_context_data(self, id=None):
+        context = super().get_context_data()
+        try:
+            context['product_detail'] = (
+            models.Product.objects.filter(id=id)
+        )
+        except Product.DoesNotExist:
+            raise Http404()
+        return context
+
 
