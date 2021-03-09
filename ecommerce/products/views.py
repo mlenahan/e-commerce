@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 from products import models
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 class HomePageView(TemplateView):
 
@@ -30,18 +30,25 @@ class ProductByTypeView(TemplateView):
         )
         return context
 
+# class ProductDetailView(TemplateView):
+#
+#     template_name = 'product_detail_view.html'
+#
+#     def get_context_data(self, id=None):
+#         context = super().get_context_data()
+#         try:
+#             context['product_detail'] = (
+#             models.Product.objects.get(id=id)
+#         )
+#         except Product.DoesNotExist:
+#             raise Http404()
+#         return context
+
 class ProductDetailView(TemplateView):
 
     template_name = 'product_detail_view.html'
 
     def get_context_data(self, id=None):
         context = super().get_context_data()
-        try:
-            context['product_detail'] = (
-            models.Product.objects.filter(id=id)
-        )
-        except Product.DoesNotExist:
-            raise Http404()
+        context['product'] = get_object_or_404(models.Product, id=id)
         return context
-
-
