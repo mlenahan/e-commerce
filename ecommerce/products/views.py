@@ -30,7 +30,6 @@ class ProductByTypeView(TemplateView):
         )
         return context
 
-
 class ProductDetailView(TemplateView):
 
     template_name = 'product_detail_view.html'
@@ -39,3 +38,4 @@ class ProductDetailView(TemplateView):
         context = super().get_context_data()
         context['product'] = get_object_or_404(models.Product, id=id)
         return context
+
