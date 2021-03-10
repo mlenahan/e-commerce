@@ -2,6 +2,7 @@ from django.views.generic.base import TemplateView
 from products import models
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from products.models import ProductType
 
 class HomePageView(TemplateView):
 

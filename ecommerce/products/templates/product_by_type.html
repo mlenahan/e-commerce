@@ -2,14 +2,21 @@
 
 <h2>All Products of This Type</h2>
 
+<a href="{% url 'home' %}">
+<h3>Home</h3>
+</a>
+
 {% for product in product_type %}
 
 <ul>
     <li>
         <div>
+            <a href="{{ product.id }}">
             <div><strong>Name: </strong>{{ product.name }}</div>
+                <a/>
             <div><strong>Type: </strong>{{ product.product_type }}</div>
         </div>
     </li>
 </ul>
 {% endfor %}
+
