@@ -1,8 +1,10 @@
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from products import models
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from products.models import ProductType
+from products.models import ProductType, Product
+from django.db.models import Q
 
 class HomePageView(TemplateView):
 
@@ -39,4 +41,16 @@ class ProductDetailView(TemplateView):
         context = super().get_context_data()
         context['product'] = get_object_or_404(models.Product, id=id)
         return context
+
+
+class SearchResultsView(ListView):
+    model = Product
+    template_name = 'search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Product.objects.filter(Q(name__icontains=query))
+        return object_list
+
+
 
