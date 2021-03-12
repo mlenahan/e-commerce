@@ -1,8 +1,7 @@
-<h1>Products</h1>
+{% extends 'base.html' %}
 
-<form action="{% url 'search-results' %}" method="get">
-    <input name="q" type="text" placeholder="Search">
-</form>
+{% block content %}
+<h1>Products</h1>
 
 <h2>Recently added</h2>
 {% for product in latest_products %}
@@ -23,3 +22,4 @@
     </li>
 </ul>
 {% endfor %}
+{% endblock %}
