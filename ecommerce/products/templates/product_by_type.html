@@ -6,17 +6,7 @@
 <h2>All Products of This Type</h2>
 
 {% for product in product_type %}
-
-<ul>
-    <li>
-        <div>
-            <a href="{% url 'detail' product.id %}">
-                <div><strong>Name: </strong>{{ product.name }}</div>
-            </a>
-            <div><strong>Type: </strong>{{ product.product_type }}</div>
-        </div>
-    </li>
-</ul>
+    {% include "product_list.html" %}
 {% endfor %}
 
 {% endblock %}
