@@ -4,7 +4,13 @@
 <h1>Products</h1>
 
 <h2>Recently added</h2>
-{% for product in latest_products %}
-    {% include "components/product_list.html" %}
-{% endfor %}
+
+<ul>
+    {% for product in latest_products %}
+        <li>
+            {% include "components/product_list.html" %}
+        </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

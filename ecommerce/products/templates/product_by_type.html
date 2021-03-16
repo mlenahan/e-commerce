@@ -5,8 +5,12 @@
 
 <h2>All Products of This Type</h2>
 
+<ul>
 {% for product in product_type %}
+    <li>
     {% include "components/product_list.html" %}
+    </li>
 {% endfor %}
+</ul>
 
 {% endblock %}
