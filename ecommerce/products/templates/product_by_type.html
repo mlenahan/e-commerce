@@ -1,8 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Products by Type</h1>
 
 <h2>All Products of This Type</h2>
-
-<a href="{% url 'home' %}">Home</a>
 
 {% for product in product_type %}
 
@@ -17,3 +18,5 @@
     </li>
 </ul>
 {% endfor %}
+
+{% endblock %}
