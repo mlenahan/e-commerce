@@ -4,22 +4,13 @@
 <h1>Products</h1>
 
 <h2>Recently added</h2>
-{% for product in latest_products %}
+
 <ul>
-    <li>
-        <div>
-            <a href="{% url 'detail' product.id %}">
-                <div><strong>Name: </strong>{{ product.name }}</div>
-            </a>
-            <a href="{% url 'product-by-type' product.product_type %}">
-                <div><strong>Type: </strong>{{ product.product_type }}</div>
-            </a>
-            <div><strong>Language: </strong>{{ product.language }}</div>
-            {% if product.rarity %}
-            <div><strong>Rarity: </strong>{{ product.rarity }}</div>
-            {% endif %}
-        </div>
-    </li>
+    {% for product in latest_products %}
+        <li>
+            {% include "components/product_list.html" %}
+        </li>
+    {% endfor %}
 </ul>
-{% endfor %}
+
 {% endblock %}

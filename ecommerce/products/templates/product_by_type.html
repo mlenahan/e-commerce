@@ -5,18 +5,12 @@
 
 <h2>All Products of This Type</h2>
 
-{% for product in product_type %}
-
 <ul>
+{% for product in product_type %}
     <li>
-        <div>
-            <a href="{% url 'detail' product.id %}">
-                <div><strong>Name: </strong>{{ product.name }}</div>
-            </a>
-            <div><strong>Type: </strong>{{ product.product_type }}</div>
-        </div>
+    {% include "components/product_list.html" %}
     </li>
-</ul>
 {% endfor %}
+</ul>
 
 {% endblock %}
