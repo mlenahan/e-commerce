@@ -8,6 +8,8 @@ class Product(models.Model):
     rarity = models.CharField(blank=True, null=True, max_length=255, choices=Rarity.CHOICES)
     image = models.ImageField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    description = models.TextField(max_length=None)
 
     def __str__(self):
         return self.name
