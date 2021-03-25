@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from products import models
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from products.models import ProductType, Product
+from products.models import Product, ProductItem, ProductType
 from django.db.models import Q
 
 class HomePageView(TemplateView):

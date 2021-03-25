@@ -13,6 +13,16 @@
             {% if product.rarity %}
             <div><strong>Rarity: </strong>{{ product.rarity }}</div>
             {% endif %}
+            <div><strong>In Stock: </strong>{{ product.productitem_set.count }}</div>
+        </div>
+        <div>
+            <ul>
+                {% for product_item in product.productitem_set.all %}
+                    <li>
+                        {% include "components/product_list_condition.html" %}
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </li>
 </ul>

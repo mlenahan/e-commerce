@@ -6,6 +6,7 @@ class Product(models.Model):
     product_type = models.CharField(max_length=255, choices=ProductType.CHOICES)
     language = models.CharField(max_length=255, choices=Languages.CHOICES)
     rarity = models.CharField(blank=True, null=True, max_length=255, choices=Rarity.CHOICES)
+    image = models.ImageField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
