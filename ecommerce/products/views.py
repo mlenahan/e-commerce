@@ -1,10 +1,12 @@
-from django.views.generic.base import TemplateView
-from django.views.generic.list import ListView
-from products import models
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
+from products import models
 from products.models import Product, ProductItem, ProductType
-from django.db.models import Q
+
 
 class HomePageView(TemplateView):
 
@@ -27,6 +29,8 @@ class ProductByTypeView(TemplateView):
         if product_type not in [c[0] for c in ProductType.CHOICES]:
             raise Http404()
         context = super().get_context_data()
+
+        # Maybe just 'products'
         context['product_type'] = (
             models.Product.objects.filter(product_type=product_type)
             .order_by('-created_at')
@@ -51,4 +55,3 @@ class SearchResultsView(ListView):
         query = self.request.GET.get('q')
         object_list = Product.objects.filter(Q(name__icontains=query))
         return object_list
-
