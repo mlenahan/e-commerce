@@ -17,6 +17,7 @@ class Rarity:
         (SECRET_RARE, 'Secret Rare')
     ]
 
+# TODO singular!
 class Languages:
     ENGLISH = 'English'
     JAPANESE = 'Japanese'
