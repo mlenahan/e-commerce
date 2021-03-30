@@ -52,6 +52,3 @@ class SearchResultsView(ListView):
         object_list = Product.objects.filter(Q(name__icontains=query))
         return object_list
 
-
-
-
