@@ -63,17 +63,17 @@ class TestProductTypeView(TestCase):
 
 class TestDetailView(TestCase):
 
+    def setUp(self):
+        self.product = models.Product.objects.create(name='Test Product')
+
     def test_successful_response(self):
-        # Add a product
-        product = models.Product.objects.create(name='Test Product', id=1)
-        url = reverse('detail', kwargs={'id': product.id})
-        print(url)
+        url = reverse('detail', kwargs={'id': self.product.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_bad_id(self):
-        bad_id = models.Product.objects.create(name='Test Product', id=50000)
-        response = self.client.get(bad_id)
+        url = reverse('detail', kwargs={'id': self.product.id + 1})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
 

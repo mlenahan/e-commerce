@@ -3,7 +3,11 @@ from products.base import Rarity, Languages, Condition, ProductType
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    product_type = models.CharField(max_length=255, choices=ProductType.CHOICES)
+    product_type = models.CharField(
+        max_length=255,
+        choices=ProductType.CHOICES,
+        default=ProductType.BOOSTER_BOX,
+    )
     language = models.CharField(max_length=255, choices=Languages.CHOICES)
     rarity = models.CharField(blank=True, null=True, max_length=255, choices=Rarity.CHOICES)
     image = models.ImageField(null=True, blank=True)
