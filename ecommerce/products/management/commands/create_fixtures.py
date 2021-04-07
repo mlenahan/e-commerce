@@ -14,6 +14,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         count = kwargs['count']
         for i in range(count):
-            Product.objects.create(name=fake.name())
-            print(fake.name())
+            product = Product.objects.create(name=fake.name())
+            print(product)
 
