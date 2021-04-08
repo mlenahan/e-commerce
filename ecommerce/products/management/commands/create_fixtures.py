@@ -6,8 +6,8 @@ import datetime
 from django.core.management.base import BaseCommand
 from faker import Faker
 
-from products.models import Product
-from products.base import Languages, ProductType, Rarity
+from products.models import Product, ProductItem
+from products.base import Languages, ProductType, Rarity, Condition
 
 
 fake = Faker()
@@ -25,8 +25,8 @@ def random_price():
     return price
 
 def product_created_at():
-    start_date = datetime.datetime(2020, 1, 1)
-    end_date = datetime.datetime(2021, 1, 1)
+    start_date = datetime.datetime(2021, 3, 8)
+    end_date = datetime.datetime(2021, 5, 8)
 
     time_between_dates = end_date - start_date
     days_between_dates = time_between_dates.days
@@ -43,23 +43,22 @@ def choice_from_choice_class(cls, nullable=False):
 
 
 def fake_product():
-    # TODO add description
-    # TODO add created_at - This should be edited after object is created
-    # TODO add price - not sure how to get random decimal in range but should be able to google it.
-    return Product.objects.create(
+    product = Product.objects.create(
         name=word_name(),
         product_type=choice_from_choice_class(ProductType),
         language=choice_from_choice_class(Languages),
         rarity=choice_from_choice_class(Rarity, True),
         description=random_description(),
         price=random_price(),
-        created_at= product_created_at(),
-
     )
+    product.created_at = product_created_at()
+    product.save()
+    return product
 
 
 def fake_product_item(product):
-    pass
+    product_item = ProductItem.objects.create(product=product, condition=choice_from_choice_class(Condition))
+    return product_item
 
 
 class Command(BaseCommand):
@@ -74,12 +73,13 @@ class Command(BaseCommand):
 
         for i in range(count):
 
-            product = Product.objects.create(name=fake.name())
-
             product = fake_product()
-            # TODO Create between 0 and 10 product items for each product
-            # for i in range(random_number_of_products):
-            #     fake_product_item(product)
+
             print(product)
             print(product.created_at)
+
+
+            for x in range(random.randrange(1, 10)):
+                product_item = fake_product_item(product)
+                print(product_item)
 

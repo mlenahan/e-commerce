@@ -17,7 +17,7 @@ class HomePageView(TemplateView):
         context['latest_products'] = (
             models.Product.objects.all()
             .order_by('-created_at')
-        )[:5]
+        )[:10]
         return context
 
 
