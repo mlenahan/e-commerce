@@ -63,21 +63,24 @@ class TestProductTypeView(TestCase):
 
 class TestDetailView(TestCase):
 
+    def setUp(self):
+        self.product = models.Product.objects.create(name='Test Product')
+
     def test_successful_response(self):
-        # Add a product
-        response = self.client.get(reverse('detail', kwargs={'id': product.id}))
+        url = reverse('detail', kwargs={'id': self.product.id})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_bad_id(self):
-        response = self.client.get('')
-        self.assertEqual(response.status_code, 200)
+        url = reverse('detail', kwargs={'id': self.product.id + 1})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
 
 
 class TestSearchView(TestCase):
 
     def test_successful_response(self):
-        # Not sure how to do query string params in reverse. I think it's something like
-        # url = reverse('search') + 'q=charizard'
+        url = reverse('search-results') + 'q=charizard'
         response = self.client.get('/search/?q=charizard')
         self.assertEqual(response.status_code, 200)
 
@@ -91,4 +94,10 @@ class TestSearchView(TestCase):
         self.assertEqual(list(response.context['product_list']), [product])
 
     def test_context_excludes_product_incorrect_search(self):
-        pass
+        product = models.Product.objects.create(
+            name='Fake',
+            product_type=ProductType.BOOSTER_BOX,
+            language=Languages.ENGLISH,
+        )
+        response = self.client.get('/search/?q=product')
+        self.assertEqual(list(response.context['product_list']), [])
