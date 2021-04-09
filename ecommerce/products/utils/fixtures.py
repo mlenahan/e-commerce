@@ -1,35 +1,32 @@
-import random
-import decimal
-import time
 import datetime
-
-from products.models import Product, ProductItem
-from products.base import Languages, ProductType, Rarity, Condition
+import decimal
+import random
+import time
 
 from faker import Faker
 
+from products.base import Languages, ProductType, Rarity, Condition
+from products.models import Product, ProductItem
+
 fake = Faker()
 
-def word_name():
-    num_words = random.randint(1, 4)
+def word_name(min_words=1, max_words=4):
+    num_words = random.randint(min_words, max_words)
     return ' '.join(fake.words(num_words)).title()
 
 def fake_description(min_num_words=50, max_num_words=100):
     words = random.randint(min_num_words, max_num_words)
     return fake.paragraph(words)
 
-def fake_price():
-    price = decimal.Decimal(random.randrange(500, 20000))/100
-    return price
+def fake_price(min_range=500, max_range=20000):
+    return decimal.Decimal(random.randrange(min_range, max_range))/100
 
 def fake_date(after=datetime.datetime(2021, 3, 8), before=datetime.datetime(2021, 5, 8)):
 
     time_between_dates = before - after
     days_between_dates = time_between_dates.days
     random_number_of_days = random.randrange(days_between_dates)
-    random_date = after + datetime.timedelta(days=random_number_of_days)
-
-    return random_date
+    return after + datetime.timedelta(days=random_number_of_days)
 
 def choice_from_choice_class(cls, nullable=False):
     choices = [c[0] for c in cls.CHOICES]
@@ -53,5 +50,4 @@ def fake_product():
 
 
 def fake_product_item(product):
-    product_item = ProductItem.objects.create(product=product, condition=choice_from_choice_class(Condition))
-    return product_item
+    return ProductItem.objects.create(product=product, condition=choice_from_choice_class(Condition))
