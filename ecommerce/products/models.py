@@ -1,6 +1,7 @@
 from django.db import models
 from products.base import Rarity, Languages, Condition, ProductType
 
+
 class Product(models.Model):
     name = models.CharField(max_length=255)
     product_type = models.CharField(
