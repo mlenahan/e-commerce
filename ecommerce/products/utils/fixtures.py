@@ -1,7 +1,6 @@
 import datetime
 import decimal
 import random
-import time
 
 from faker import Faker
 
@@ -10,16 +9,20 @@ from products.models import Product, ProductItem
 
 fake = Faker()
 
+
 def word_name(min_words=1, max_words=4):
     num_words = random.randint(min_words, max_words)
     return ' '.join(fake.words(num_words)).title()
+
 
 def fake_description(min_num_words=50, max_num_words=100):
     words = random.randint(min_num_words, max_num_words)
     return fake.paragraph(words)
 
+
 def fake_price(min_range=500, max_range=20000):
-    return decimal.Decimal(random.randrange(min_range, max_range))/100
+    return decimal.Decimal(random.randrange(min_range, max_range)) / 100
+
 
 def fake_date(after=datetime.datetime(2021, 3, 8), before=datetime.datetime(2021, 5, 8)):
 
@@ -27,6 +30,7 @@ def fake_date(after=datetime.datetime(2021, 3, 8), before=datetime.datetime(2021
     days_between_dates = time_between_dates.days
     random_number_of_days = random.randrange(days_between_dates)
     return after + datetime.timedelta(days=random_number_of_days)
+
 
 def choice_from_choice_class(cls, nullable=False):
     choices = [c[0] for c in cls.CHOICES]

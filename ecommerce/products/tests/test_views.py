@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.test import TestCase, Client
+from django.test import TestCase
 
 from products import models
 from products.base import Languages, ProductType
@@ -52,7 +52,7 @@ class TestProductTypeView(TestCase):
         self.assertEqual(list(response.context['product_type']), [product])
 
     def test_context_excludes_product_incorrect_type(self):
-        product = models.Product.objects.create(
+        models.Product.objects.create(
             name='Test product',
             product_type=ProductType.BOOSTER_BOX,
             language=Languages.ENGLISH,
@@ -81,7 +81,7 @@ class TestSearchView(TestCase):
 
     def test_successful_response(self):
         url = reverse('search-results') + 'q=charizard'
-        response = self.client.get('/search/?q=charizard')
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_context_includes_product_correct_search(self):
@@ -94,7 +94,7 @@ class TestSearchView(TestCase):
         self.assertEqual(list(response.context['product_list']), [product])
 
     def test_context_excludes_product_incorrect_search(self):
-        product = models.Product.objects.create(
+        models.Product.objects.create(
             name='Fake',
             product_type=ProductType.BOOSTER_BOX,
             language=Languages.ENGLISH,

@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
 from products import models
-from products.models import Product, ProductItem, ProductType
+from products.models import Product, ProductType
 
 
 class HomePageView(TemplateView):
@@ -36,6 +36,7 @@ class ProductByTypeView(TemplateView):
             .order_by('-created_at')
         )
         return context
+
 
 class ProductDetailView(TemplateView):
 

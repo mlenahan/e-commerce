@@ -1,6 +1,3 @@
-from django.db import models
-
-
 class Rarity:
     COMMON = 'Common'
     UNCOMMON = 'Uncommon'
@@ -17,6 +14,7 @@ class Rarity:
         (SECRET_RARE, 'Secret Rare')
     ]
 
+
 # TODO singular!
 class Languages:
     ENGLISH = 'English'
@@ -24,7 +22,7 @@ class Languages:
     FRENCH = 'French'
     SPANISH = 'Spanish'
     GERMAN = 'German'
-    CHINESE ='Chinese'
+    CHINESE = 'Chinese'
     KOREAN = 'Korean'
     CHOICES = [
         (ENGLISH, 'English'),
@@ -35,6 +33,7 @@ class Languages:
         (CHINESE, 'Chinese'),
         (KOREAN, 'Korean')
     ]
+
 
 class Condition:
     SEALED_PRODUCT = 'Sealed Product'
@@ -51,6 +50,7 @@ class Condition:
         (HEAVY_PLAY, 'Heavy Play'),
         (DAMAGED, 'Damaged')
     ]
+
 
 class ProductType:
     BOOSTER_BOX = 'booster-box'
@@ -81,4 +81,3 @@ class ProductType:
         (BOOSTER_PACK, 'Booster Pack'),
         (SINGLE_CARD, 'Single Card')
     ]
-
